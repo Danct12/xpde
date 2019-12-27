@@ -1,0 +1,16 @@
+object XPMenu: TXPMenu
+  Left = 321
+  Top = 173
+  Width = 300
+  Height = 453
+  BorderStyle = fbsNone
+  Color = clBackground
+  FormStyle = fsStayOnTop
+  Position = poDefault
+  OnMouseDown = FormMouseDown
+  OnMouseMove = FormMouseMove
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 22
+  TextWidth = 7
+end

@@ -1,0 +1,45 @@
+object ActiveTasksDlg: TActiveTasksDlg
+  Left = 488
+  Top = 471
+  Width = 330
+  Height = 113
+  HorzScrollBar.Range = 305
+  Color = clBackground
+  Font.Color = clBlack
+  Font.Height = 11
+  Font.Name = 'bitstream vera sans mono'
+  Font.Pitch = fpFixed
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  KeyPreview = True
+  ParentFont = False
+  Position = poDefault
+  Scaled = False
+  OnClose = FormClose
+  OnPaint = FormPaint
+  OnShow = FormShow
+  PixelsPerInch = 96
+  object Label1: TLabel
+    Left = 17
+    Top = 83
+    Width = 288
+    Height = 15
+    Anchors = [akLeft, akBottom]
+    AutoSize = False
+    Caption = 'My Network Places'
+    Font.Color = clBlack
+    Font.Height = 12
+    Font.Name = 'bitstream vera sans mono'
+    Font.Pitch = fpFixed
+    Font.Style = [fsBold]
+    Masked = True
+    ParentFont = False
+    Transparent = True
+  end
+  object Timer1: TTimer
+    Interval = 10
+    OnTimer = Timer1Timer
+    Left = 240
+    Top = 28
+  end
+end

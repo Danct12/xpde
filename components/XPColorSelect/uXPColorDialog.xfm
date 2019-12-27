@@ -1,0 +1,36 @@
+object XPColorDialog: TXPColorDialog
+  Left = 0
+  Top = 0
+  ActiveControl = btnOther
+  AutoScroll = False
+  BorderStyle = fbsNone
+  Caption = 'XPColorDialog'
+  ClientHeight = 151
+  ClientWidth = 101
+  Color = clBackground
+  Font.Color = clBlack
+  Font.Height = 11
+  Font.Name = 'bitstream vera sans mono'
+  Font.Pitch = fpFixed
+  Font.Style = []
+  KeyPreview = True
+  ParentFont = False
+  Position = poDefault
+  Scaled = False
+  OnClick = FormClick
+  OnCreate = FormCreate
+  OnMouseMove = FormMouseMove
+  OnPaint = FormPaint
+  OnShow = FormShow
+  PixelsPerInch = 72
+  object btnOther: TButton
+    Left = 4
+    Top = 124
+    Width = 67
+    Height = 23
+    Cancel = True
+    Caption = 'Other...'
+    TabOrder = 0
+    OnClick = btnOtherClick
+  end
+end

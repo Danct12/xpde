@@ -1,0 +1,45 @@
+Changelog:
+==========
+
+2004-02-07
+  - fixed: ProgressBar does not work with large Max values
+
+2004-01-26
+  - requires unofficial VisualCLX patches version 3.1
+  - Added (button) theming for MDI Child's caption buttons
+  - Faster painting under Linux (especially controls that need a border)
+  - ISSUE: RadioGroupBox does not work under Linux because it needs a clWhite 
+           mask. Under Windows it wants a black mask. If QThemed paints a 
+           white mask the TRadioButton meight not work.
+           If you want to activate this feature (maybe it works) open
+           QThemed.pas and remove the dot (".") from
+           {.$DEFINE USE_WHITE_RADIOMASK}
+
+2003-12-30
+  - Better IsMouseOver function that knows about z-order
+
+2003-12-27
+  - Kylix support.
+
+2003-12-24
+  - Support for native QFrame controls
+  - ScrollBar background is now correct
+  - removed most Windows related code from QThemed.pas.
+  - workaround for WindowsXP Theming bug with ProgressBar.Height < 10
+  - fixed: vertical ProgressBar chunk is painted upside-down.
+
+2003-12-23
+  - Fixed DBLookupCombo-ListBox bug.
+  - Renamed units QUxTheme.pas and QTmSchema.pas because of name 
+    conflicts with Delphi 7 units.
+
+2003-12-06
+  - Fixed endless painting in TCustomTabControl
+  - Added tsButtons and tsFlatButtons theming for TCustomTabControl
+
+2003-11-17
+  - Fixed AV with TCustomTabControl where Tabs.Count = 0
+  - Added Menu painting for raw Qt menus.
+
+2003-11-16
+  - TCustomTabControl (=TPageControl) draws the text over the Left and Right SpeedButton.

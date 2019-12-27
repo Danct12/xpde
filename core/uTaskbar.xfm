@@ -1,0 +1,22 @@
+object taskbar: Ttaskbar
+  Left = 51
+  Top = 315
+  AutoScroll = False
+  BorderStyle = fbsNone
+  ClientHeight = 640
+  ClientWidth = 870
+  Color = clBackground
+  Font.Color = clBlack
+  Font.Height = 11
+  Font.Name = 'tahoma'
+  Font.Pitch = fpVariable
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  ParentFont = False
+  Position = poDefault
+  Scaled = False
+  Visible = True
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 72
+end

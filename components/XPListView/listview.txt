@@ -1,0 +1,132 @@
+*Hacer un TXPStringItems para que complemente al listview virtual
+*Los componentes items deben llevar una opcion de columnas
+
+----------------------------------------------------------------------------------------------------
+procedure Arrange(Code: TListArrangement);
+
+TListArrangement = (arAlignBottom, arAlignLeft, arAlignRight, arAlignTop, arDefault, arSnapToGrid);
+----------------------------------------------------------------------------------------------------
+procedure Clear; override;
+procedure ClearSelection; override;
+----------------------------------------------------------------------------------------------------
+function GetItemAt(X, Y: Integer): TListItem;
+function GetNearestItem(Point: TPoint; Direction: TSearchDirection): TListItem;
+function GetNextItem(StartItem: TListItem; Direction: TSearchDirection; States: TItemStates): TListItem;
+
+TSearchDirection = (sdLeft, sdRight, sdAbove, sdBelow, sdAll);
+----------------------------------------------------------------------------------------------------
+function GetSearchString: string;
+function IsEditing: Boolean;
+procedure SelectAll; override;
+procedure Scroll(DX, DY: Integer);
+property Canvas: TCanvas read FCanvas;
+----------------------------------------------------------------------------------------------------
+property DropTarget: TListItem read GetDropTarget write SetDropTarget;
+property ItemFocused: TListItem read GetFocused write SetFocused;
+property SelCount: Integer read GetSelCount;
+property Selected: TListItem read GetSelected write SetSelected;
+----------------------------------------------------------------------------------------------------
+property TopItem: TListItem read GetTopItem;
+property ViewOrigin: TPoint read GetViewOrigin;
+property VisibleRowCount: Integer read GetVisibleRowCount;
+property BoundingRect: TRect read GetBoundingRect;
+----------------------------------------------------------------------------------------------------
+property BorderStyle: TBorderStyle read FBorderStyle write SetBorderStyle default bsSingle;
+property Columns: TListColumns read FListColumns write SetListColumns;
+property ColumnClick: Boolean read FColumnClick write SetColumnClick default True;
+property ReadOnly: Boolean read FReadOnly write SetReadOnly;
+----------------------------------------------------------------------------------------------------
+property IconOptions: TIconOptions read FIconOptions write SetIconOptions;
+
+  TIconArrangement = (iaTop, iaLeft);
+
+  TIconOptions = class(TPersistent)
+  private
+    FListView: TCustomListView;
+    FArrangement: TIconArrangement;
+    FAutoArrange: Boolean;
+    FWrapText: Boolean;
+    procedure SetArrangement(Value: TIconArrangement);
+    procedure SetAutoArrange(Value: Boolean);
+    procedure SetWrapText(Value: Boolean);
+  public
+    constructor Create(AOwner: TCustomListView);
+  published
+    property Arrangement: TIconArrangement read FArrangement write SetArrangement default iaTop;
+    property AutoArrange: Boolean read FAutoArrange write SetAutoArrange default False;
+    property WrapText: Boolean read FWrapText write SetWrapText default True;
+  end;
+----------------------------------------------------------------------------------------------------  
+property Items: TListItems read FListItems write SetItems stored AreItemsStored;    
+property LargeImages: TCustomImageList read FLargeImages write SetLargeImages;
+property MultiSelect: Boolean read FMultiSelect write SetMultiSelect default False;
+property SmallImages: TCustomImageList read FSmallImages write SetSmallImages;
+property SortType: TSortType read FSortType write SetSortType default stNone;
+property StateImages: TCustomImageList read FStateImages write SetStateImages;
+property ViewStyle: TViewStyle read FViewStyle write SetViewStyle default vsIcon;
+----------------------------------------------------------------------------------------------------    
+            
+    procedure AddItem(Item: String; AObject: TObject); override;
+    function AlphaSort: Boolean;
+
+
+    procedure CopySelection(Destination: TCustomListControl); override;
+    procedure DeleteSelected; override;
+    function FindCaption(StartIndex: Integer; Value: string; Partial, Inclusive, Wrap: Boolean): TListItem;
+    function FindData(StartIndex: Integer; Value: Pointer; Inclusive, Wrap: Boolean): TListItem;
+    function GetHitTestInfoAt(X, Y: Integer): THitTests;
+
+
+    property Checkboxes: Boolean read FCheckboxes write SetCheckboxes default False;
+    property Column[Index: Integer]: TListColumn read GetColumnFromIndex;
+    property FlatScrollBars: Boolean read FFlatScrollBars write SetFlatScrollBars default False;
+    property FullDrag: Boolean read FFullDrag write SetFullDrag default False;
+    property GridLines: Boolean read FGridLines write SetGridLines default False;
+    property HotTrack: Boolean read FHotTrack write SetHotTrack default False;
+    property HotTrackStyles: TListHotTrackStyles read FHotTrackStyles write SetHotTrackStyles default [];
+    property RowSelect: Boolean read FRowSelect write SetRowSelect default False;
+    function CustomSort(SortProc: TLVCompare; lParam: Longint): Boolean;
+    function StringWidth(S: string): Integer;
+    procedure UpdateItems(FirstIndex, LastIndex: Integer);
+    property WorkAreas: TWorkAreas read FWorkAreas;
+    
+-------------------
+
+        
+        
+    property HideSelection: Boolean read FHideSelection write SetHideSelection default True;
+    property AllocBy: Integer read FAllocBy write SetAllocBy default 0;
+    property HoverTime: Integer read GetHoverTime write SetHoverTime default -1;
+    property OwnerData: Boolean read FOwnerData write SetOwnerData default False;
+    property OwnerDraw: Boolean read FOwnerDraw write SetOwnerDraw default False;
+    property OnAdvancedCustomDraw: TLVAdvancedCustomDrawEvent read FOnAdvancedCustomDraw write FOnAdvancedCustomDraw;
+    property OnAdvancedCustomDrawItem: TLVAdvancedCustomDrawItemEvent read FOnAdvancedCustomDrawItem write FOnAdvancedCustomDrawItem;
+    property OnAdvancedCustomDrawSubItem: TLVAdvancedCustomDrawSubItemEvent read FOnAdvancedCustomDrawSubItem write FOnAdvancedCustomDrawSubItem;
+    property OnChange: TLVChangeEvent read FOnChange write FOnChange;
+    property OnChanging: TLVChangingEvent read FOnChanging write FOnChanging;
+    property OnColumnClick: TLVColumnClickEvent read FOnColumnClick  write FOnColumnClick;
+    property OnColumnDragged: TNotifyEvent read FOnColumnDragged write FOnColumnDragged;
+    property OnColumnRightClick: TLVColumnRClickEvent read FOnColumnRightClick write FOnColumnRightClick;
+    property OnCompare: TLVCompareEvent read FOnCompare write FOnCompare;
+    property OnCustomDraw: TLVCustomDrawEvent read FOnCustomDraw write FOnCustomDraw;
+    property OnCustomDrawItem: TLVCustomDrawItemEvent read FOnCustomDrawItem write FOnCustomDrawItem;
+    property OnCustomDrawSubItem: TLVCustomDrawSubItemEvent read FOnCustomDrawSubItem write FOnCustomDrawSubItem;
+    property OnData: TLVOwnerDataEvent read FOnData write FOnData;
+    property OnDataFind: TLVOwnerDataFindEvent read FOnDataFind write FOnDataFind;
+    property OnDataHint: TLVOwnerDataHintEvent read FOnDataHint write FOnDataHint;
+    property OnDataStateChange: TLVOwnerDataStateChangeEvent read FOnDataStateChange write FOnDataStateChange;
+    property OnDeletion: TLVDeletedEvent read FOnDeletion write FOnDeletion;
+    property OnDrawItem: TLVDrawItemEvent read FOnDrawItem write FOnDrawItem;
+    property OnEdited: TLVEditedEvent read FOnEdited write FOnEdited;
+    property OnEditing: TLVEditingEvent read FOnEditing write FOnEditing;
+    property OnInfoTip: TLVInfoTipEvent read FOnInfoTip write FOnInfoTip;
+    property OnInsert: TLVDeletedEvent read FOnInsert write FOnInsert;
+    property OnGetImageIndex: TLVNotifyEvent read FOnGetImageIndex write FOnGetImageIndex;
+    property OnGetSubItemImage: TLVSubItemImageEvent read FOnGetSubItemImage write FOnGetSubItemImage;
+    property OnSelectItem: TLVSelectItemEvent read FOnSelectItem write FOnSelectItem;
+    property ShowColumnHeaders: Boolean read FShowColumnHeaders write SetColumnHeaders default True;
+    property ShowWorkAreas: Boolean read FShowWorkAreas write SetShowWorkAreas default False;
+    property OnCreateItemClass: TLVCreateItemClassEvent read FOnCreateItemClass write FOnCreateItemClass;    
+    
+    
+  

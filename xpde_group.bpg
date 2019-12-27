@@ -1,0 +1,25 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.02.5
+#------------------------------------------------------------------------------
+ifndef ROOT
+ROOT = /home/ttm/kylix3
+endif
+#------------------------------------------------------------------------------
+MAKE = make -$(MAKEFLAGS) -f$**
+DCC =dcc $<
+#------------------------------------------------------------------------------
+PROJECTS = bplXPColorSelect.so desktop_properties xpde
+#------------------------------------------------------------------------------
+default: $(PROJECTS)
+#------------------------------------------------------------------------------
+
+xpde: core/xpde.dpr
+	$(DCC)
+
+desktop_properties: applets/desktop_properties/desktop_properties.dpr
+	$(DCC)
+
+bplXPColorSelect.so: components/XPColorSelect/XPColorSelect.dpk
+	$(DCC)
+
+
